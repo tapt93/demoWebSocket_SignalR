@@ -1,5 +1,6 @@
 .App {
-  text-align: center;
+  width: 90%;
+  margin: 0 auto;
 }
 
 .App-logo {
@@ -35,4 +36,9 @@
   to {
     transform: rotate(360deg);
   }
+}
+.message{
+  background: #eee;
+  border-radius: 5px;
+  padding: 0 10px;
 }
