@@ -6,8 +6,6 @@ import ChatInput from './ChatInput';
 export default function Chat() {
   const [connection, setConnection] = useState(null);
   const [chat, setChat] = useState([]);
-  const lastestChat = useRef(null);
-  lastestChat.current = chat;
 
   useEffect(() => {
     const newConnection = new HubConnectionBuilder()
@@ -22,7 +20,7 @@ export default function Chat() {
       connection.start()
         .then(res => {
           connection.on('ReceiveMessage', message => {
-            const updatedChat = [...lastestChat.current];
+            const updatedChat = [...chat];
             updatedChat.push(message);
             setChat(updatedChat);
           })
@@ -32,7 +30,6 @@ export default function Chat() {
   }, [connection]);
 
   async function sendMessage(user, message) {
-    debugger
     if (connection.connectionStarted) {
       try {
         await connection.send('SendMessage', { user, message });
